@@ -1,0 +1,43 @@
+<h2>Questions</h2>
+<% count = 1 %>
+<% pgcount = 1 %>
+<!-- Tabs -->
+<ul class="nav nav-tabs">
+    <% File.readlines('questions.txt').each_slice(5) do |page| %>
+        <%= page_creator(pgcount) %>
+        <% pgcount += 1 %>
+    <% end %>
+</ul>
+
+<!-- Tab Content -->
+<form action="/answers">
+    <% pgcount = 1 %>
+    <div class="tab-content">
+        <% File.readlines('questions.txt').each_slice(5) do |page| %>
+            <% if pgcount != 1  %>
+                <div class="tab-pane fade" id="Page<%=pgcount%>">
+                    <h3>Page <%= pgcount %> </h3>
+                    <% page.each do |question| %>
+                        <%= question_creator(question,count) %>
+                        <% count +=1 %>
+                    <% end %>
+                </div>
+                <% pgcount +=1 %>
+            <% else %>
+                <div class="tab-pane fade in active" id="Page<%=pgcount%>">
+                    <h3>Page <%= pgcount %> </h3>
+                    <% page.each do |question| %>
+                        <%= question_creator(question,count) %>
+                        <% count +=1 %>
+                    <% end %>
+                </div>
+                <% pgcount +=1 %>
+            <% end %>
+        <% end %>
+    </div>
+
+    <button type="submit">Submit Form</button>
+</form>
+<!--<script src="js/main.js">
+
+</script> -->

@@ -1,0 +1,8 @@
+
+@import "_bootstrap.scss";
+
+.navbar-nav > li > a{
+    &:hover, &:active{
+        text-decoration: underline;
+    }
+}
